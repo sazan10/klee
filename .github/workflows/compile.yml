@@ -47,6 +47,6 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake ../
+        cmake -DENABLE_UNIT_TESTS=ON ../
         make
         make unittests

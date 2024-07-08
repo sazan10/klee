@@ -40,6 +40,7 @@ jobs:
         cd cadiback
         ./configure
         make
+        sudo make install
     - name: Setup Cryptominisat
       run: | 
         sudo apt-get install cmake g++ zlib1g-dev libboost-program-options-dev libm4ri-dev

@@ -42,4 +42,4 @@ jobs:
         cd build
         cmake ..
         cmake --build .
-        cmake --install .
+        sudo cmake --install .

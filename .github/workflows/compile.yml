@@ -43,3 +43,10 @@ jobs:
         cmake ..
         cmake --build .
         sudo cmake --install .
+    - name: Build klee
+      run: |
+        mkdir build
+        cd build
+        cmake ../
+        make
+        make unittests

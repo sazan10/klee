@@ -29,17 +29,6 @@ jobs:
         sudo apt-get install -y cmake bison flex libboost-all-dev libgmp-dev python2 perl
         sudo apt-get install -y git
         sudo apt-get install -y g++ gcc minisat
-    - name: Setup Cryptominisat
-      run: | 
-        sudo apt-get install cmake g++ zlib1g-dev libboost-program-options-dev libm4ri-dev
-        git clone https://github.com/msoos/cryptominisat.git
-        cd cryptominisat
-        mkdir build
-        cd build
-        cmake ..
-        make
-        sudo make install
-        sudo ldconfig
 
     - name: Setup stp
       run: |
@@ -56,6 +45,19 @@ jobs:
         cmake ..
         cmake --build .
         sudo cmake --install .
+
+    - name: Setup Cryptominisat
+      run: | 
+        sudo apt-get install cmake g++ zlib1g-dev libboost-program-options-dev libm4ri-dev
+        git clone https://github.com/msoos/cryptominisat.git
+        cd cryptominisat
+        mkdir build
+        cd build
+        cmake ..
+        make
+        sudo make install
+        sudo ldconfig
+        
     - name: Build klee
       run: |
         export LD_LIBRARY_PATH=/lib:$LD_LIBRARY_PATH

@@ -17,7 +17,7 @@ jobs:
         sudo apt-get install wget build-essential cmake curl file g++-multilib gcc-multilib git libunwind-dev libcap-dev libgoogle-perftools-dev libncurses5-dev libsqlite3-dev libtcmalloc-minimal4 python3-pip unzip graphviz doxygen
         sudo pip3 install lit wllvm
         sudo apt-get install python3-tabulate
-        pip3 install --user lit wllvm
+        pip3 install --user lit wllvm 
     - name: Install llvm 3
       run: |
         wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -      
@@ -28,7 +28,7 @@ jobs:
         sudo apt-get -y install tzdata
         sudo apt-get install -y cmake bison flex libboost-all-dev libgmp-dev python2 perl
         sudo apt-get install -y git
-        sudo apt-get install -y g++ gcc 
+        sudo apt-get install -y g++ gcc minisat
     - name: Setup stp
       run: |
         git clone https://github.com/stp/stp

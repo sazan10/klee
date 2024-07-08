@@ -38,6 +38,7 @@ jobs:
         ./scripts/deps/setup-outputcheck.sh
         ./scripts/deps/setup-cms.sh
         ./scripts/deps/setup-minisat.sh
+        export LD_LIBRARY_PATH=/lib:$LD_LIBRARY_PATH
         mkdir build
         cd build
         cmake ..
@@ -45,8 +46,7 @@ jobs:
         sudo cmake --install .
     - name: Build klee
       run: |
-        find /usr/lib /usr/local/lib -name "libminisat.so.2"
-        export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+        export LD_LIBRARY_PATH=/lib:$LD_LIBRARY_PATH
         mkdir build
         cd build
         cmake ../

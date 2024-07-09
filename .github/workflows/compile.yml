@@ -29,26 +29,6 @@ jobs:
         sudo apt-get install -y cmake bison flex libboost-all-dev libgmp-dev python2 perl
         sudo apt-get install -y git
         sudo apt-get install -y g++ gcc minisat
-    - name: Setup cadiback
-      run: |
-        git clone https://github.com/arminbiere/cadical
-        cd cadical 
-        ./configure
-        make
-        cd ..
-        git clone https://github.com/arminbiere/cadiback
-        cd cadiback
-        ./configure
-        make
-    - name: Setup Cryptominisat
-      run: | 
-        sudo apt-get install cmake g++ zlib1g-dev libboost-program-options-dev libm4ri-dev
-        git clone https://github.com/msoos/cryptominisat.git
-        cd cryptominisat
-        cmake .
-        make
-        sudo make install
-        sudo ldconfig
     - name: Setup stp
       run: |
         git clone https://github.com/stp/stp
@@ -66,6 +46,28 @@ jobs:
         sudo cmake --install .
 
         
+    - name: Setup cadiback
+      run: |
+        git clone https://github.com/arminbiere/cadical
+        cd cadical 
+        ./configure
+        make
+        cd ..
+        git clone https://github.com/arminbiere/cadiback
+        cd cadiback
+        ./configure
+        make
+    - name: Setup Cryptominisat
+      run: | 
+        sudo apt-get install cmake g++ zlib1g-dev libboost-program-options-dev libm4ri-dev
+        cp stp/libcadiback.so cadiback/cadiback.so
+        git clone https://github.com/msoos/cryptominisat.git
+        cd cryptominisat
+        cmake .
+        make
+        sudo make install
+        sudo ldconfig
+
     - name: Build klee
       run: |
         export LD_LIBRARY_PATH=/lib:$LD_LIBRARY_PATH

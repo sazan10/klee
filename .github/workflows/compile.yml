@@ -60,6 +60,7 @@ jobs:
     - name: Setup Cryptominisat
       run: | 
         sudo apt-get install cmake g++ zlib1g-dev libboost-program-options-dev libm4ri-dev
+        mkdir -p cadiback
         cp stp/deps/cadiback/libcadiback.so cadiback/cadiback.so
         git clone https://github.com/msoos/cryptominisat.git
         cd cryptominisat

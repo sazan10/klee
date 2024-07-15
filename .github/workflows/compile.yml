@@ -31,9 +31,10 @@ jobs:
         sudo apt-get install -y g++ gcc minisat
     - name: Install crypto minisat
       run: | 
+        mkdir crypto && cd crypto
         wget -O cryptominisat.tgz https://github.com/msoos/cryptominisat/archive/5.11.21.tar.gz 
         tar xvf cryptominisat.tgz --strip-components 1 
-        mkdir build-crypto && cd build-crypto 
+        mkdir build && cd build 
         cmake .. -DCMAKE_BUILD_TYPE=Release -DENABLE_ASSERTIONS=OFF -DSTATICCOMPILE=ON 
         cmake --build . 
         sudo cmake --install .

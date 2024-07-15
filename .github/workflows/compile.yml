@@ -36,7 +36,7 @@ jobs:
         mkdir build && cd build 
         cmake .. -DCMAKE_BUILD_TYPE=Release -DENABLE_ASSERTIONS=OFF -DSTATICCOMPILE=ON 
         cmake --build . 
-        cmake --install .
+        sudo cmake --install .
     - name: Setup stp
       run: |
         git clone https://github.com/stp/stp

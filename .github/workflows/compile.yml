@@ -59,6 +59,8 @@ jobs:
     - name: Build klee
       run: |
         # export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+        export LD_LIBRARY_PATH=stp/deps/libcadiback:$LD_LIBRARY_PATH
+
         mkdir build
         cd build
         cmake ../

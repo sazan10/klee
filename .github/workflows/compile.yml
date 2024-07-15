@@ -59,7 +59,10 @@ jobs:
     - name: Build klee
       run: |
         # export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
-        export LD_LIBRARY_PATH=stp/deps/libcadiback:$LD_LIBRARY_PATH
+        cp stp/deps/cadical/build/libcadical.so /lib/libcadical.so
+        cp stp/deps/cadiback/libcadiback.so /lib/libcadiback.so 
+        
+        export LD_LIBRARY_PATH=/lib:$LD_LIBRARY_PATH
 
         mkdir build
         cd build

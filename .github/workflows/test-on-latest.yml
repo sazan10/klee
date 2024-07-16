@@ -72,7 +72,7 @@ jobs:
         sudo cp stp/deps/cadiback/libcadiback.so /lib/libcadiback.so 
         # sudo cp /usr/local/lib/libcryptominisat5.so.5.8 /lib/libcryptominisat5.so.5.11
         export LD_LIBRARY_PATH=/lib:$LD_LIBRARY_PATH
-
+        # hello
         mkdir build
         cd build
         cmake ../

@@ -66,10 +66,10 @@ jobs:
     - name: Build klee
       run: |
         # export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
-        sudo apt install libcryptominisat5-5.8
+        # sudo apt install libcryptominisat5-5.8
         sudo cp stp/deps/cadical/build/libcadical.so /lib/libcadical.so
         sudo cp stp/deps/cadiback/libcadiback.so /lib/libcadiback.so 
-        sudo cp /usr/local/lib/libcryptominisat5.so.5.8 /lib/libcryptominisat5.so.5.11
+        # sudo cp /usr/local/lib/libcryptominisat5.so.5.8 /lib/libcryptominisat5.so.5.11
         export LD_LIBRARY_PATH=/lib:$LD_LIBRARY_PATH
 
         mkdir build

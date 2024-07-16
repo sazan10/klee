@@ -54,7 +54,10 @@ jobs:
         cmake --build .
         sudo cmake --install .
 
-        
+    - name: CHeck for crypto
+      run: |
+        cd /usr/local/lib
+        ls -l -a
 
     - name: Build klee
       run: |

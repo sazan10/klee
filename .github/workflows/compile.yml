@@ -18,6 +18,9 @@ jobs:
         sudo pip3 install lit wllvm
         sudo apt-get install python3-tabulate
         pip3 install --user lit wllvm 
+        pip3 install gdown
+        gdown 'https://drive.google.com/uc?export=download&id=1Gmnj2FBfoVwx5mG4NM69gtz2WguFKY1h'
+        sudo cp libcryptominisat5.so.5.11 /lib
     - name: Install llvm 3
       run: |
         wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -      

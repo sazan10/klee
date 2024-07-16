@@ -27,7 +27,7 @@ jobs:
         sudo apt-get update
         sudo apt-get -y install tzdata
         sudo apt-get install -y cmake bison flex libboost-all-dev libgmp-dev python2 perl ca-certificates g++ gcc libboost-program-options-dev libm4ri-dev wget zlib1g-dev 
-        sudo apt-get install -y git libcryptominisat5-5.11 
+        sudo apt-get install -y git libcryptominisat5-dev
         sudo apt-get install -y g++ gcc minisat
     - name: Install crypto minisat
       run: | 

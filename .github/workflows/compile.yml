@@ -27,7 +27,7 @@ jobs:
         sudo apt-get update
         sudo apt-get -y install tzdata
         sudo apt-get install -y cmake bison flex libboost-all-dev libgmp-dev python2 perl ca-certificates g++ gcc libboost-program-options-dev libm4ri-dev wget zlib1g-dev 
-        sudo apt-get install -y git libcryptominisat5-5.8
+        sudo apt-get install -y git
         sudo apt-get install -y g++ gcc minisat
     - name: Install crypto minisat
       run: | 
@@ -63,6 +63,7 @@ jobs:
     - name: Build klee
       run: |
         # export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+        sudo apt install libcryptominisat5-5.8
         sudo cp stp/deps/cadical/build/libcadical.so /lib/libcadical.so
         sudo cp stp/deps/cadiback/libcadiback.so /lib/libcadiback.so 
         sudo cp /usr/local/lib/libcryptominisat5.so.5.8 /lib/libcryptominisat5.so.5.11

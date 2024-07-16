@@ -1,4 +1,4 @@
-name: Build klee
+name: Test klee before patch
 
 on:
   push:

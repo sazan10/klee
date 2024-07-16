@@ -1,0 +1,77 @@
+name: Build klee
+
+on:
+  push:
+
+jobs:
+  run-jpf:
+    runs-on: ubuntu-22.04
+    name: Build Klee
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+      with:
+        ref: 7b46fc6cc9d9104a226d28f286b19fffc5a1e029
+    - name: Install dependencies
+      run: |
+        sudo apt-get install wget build-essential cmake curl file g++-multilib gcc-multilib git libunwind-dev libcap-dev libgoogle-perftools-dev libncurses5-dev libsqlite3-dev libtcmalloc-minimal4 python3-pip unzip graphviz doxygen
+        sudo pip3 install lit wllvm
+        sudo apt-get install python3-tabulate
+        pip3 install --user lit wllvm 
+        pip3 install gdown
+        gdown 'https://drive.google.com/uc?export=download&id=1Gmnj2FBfoVwx5mG4NM69gtz2WguFKY1h'
+        sudo cp libcryptominisat5.so.5.11 /lib
+    - name: Install llvm 3
+      run: |
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -      
+        sudo apt-get install clang-13 llvm-13 llvm-13-dev llvm-13-tools 
+    - name: Install deps for STP
+      run: | 
+        sudo apt-get update
+        sudo apt-get -y install tzdata
+        sudo apt-get install -y cmake bison flex libboost-all-dev libgmp-dev python2 perl ca-certificates g++ gcc libboost-program-options-dev libm4ri-dev wget zlib1g-dev 
+        sudo apt-get install -y git
+        sudo apt-get install -y g++ gcc minisat
+    - name: Install crypto minisat
+      run: | 
+        mkdir crypto && cd crypto
+        wget -O cryptominisat.tgz https://github.com/msoos/cryptominisat/archive/5.11.21.tar.gz 
+        tar xvf cryptominisat.tgz --strip-components 1 
+        mkdir build && cd build 
+        cmake .. -DCMAKE_BUILD_TYPE=Release -DENABLE_ASSERTIONS=OFF -DSTATICCOMPILE=ON 
+        cmake --build . 
+        sudo cmake --install .
+    - name: Setup stp
+      run: |
+        git clone https://github.com/stp/stp
+        cd stp
+        git submodule init && git submodule update  
+        ./scripts/deps/setup-gtest.sh
+        ./scripts/deps/setup-outputcheck.sh
+        ./scripts/deps/setup-cms.sh
+        ./scripts/deps/setup-minisat.sh
+   
+        mkdir build
+        cd build
+        cmake ..
+        cmake --build .
+        sudo cmake --install .
+
+    - name: CHeck for crypto
+      run: |
+        ls -l -a /usr/local/lib
+        ls -l -a /usr/lib
+        ls -l -a /lib
+    - name: Build klee
+      run: |
+        # export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+        # sudo apt install libcryptominisat5-5.8
+        sudo cp stp/deps/cadical/build/libcadical.so /lib/libcadical.so
+        sudo cp stp/deps/cadiback/libcadiback.so /lib/libcadiback.so 
+        # sudo cp /usr/local/lib/libcryptominisat5.so.5.8 /lib/libcryptominisat5.so.5.11
+        export LD_LIBRARY_PATH=/lib:$LD_LIBRARY_PATH
+        # hello
+        # cmake -DENABLE_UNIT_TESTS=ON -ENABLE_SYSTEM_TESTS=ON -DGTEST_SRC_DIR=~/klee/test ../
+        make
+        sudo make check

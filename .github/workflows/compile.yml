@@ -61,7 +61,7 @@ jobs:
         # export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
         sudo cp stp/deps/cadical/build/libcadical.so /lib/libcadical.so
         sudo cp stp/deps/cadiback/libcadiback.so /lib/libcadiback.so 
-        
+        sudo cp /usr/local/lib/libcryptominisat5.so /lib/libcryptominisat5.so.5.11
         export LD_LIBRARY_PATH=/lib:$LD_LIBRARY_PATH
 
         mkdir build

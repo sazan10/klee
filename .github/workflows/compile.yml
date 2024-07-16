@@ -56,8 +56,9 @@ jobs:
 
     - name: CHeck for crypto
       run: |
-        cd /usr/local/lib
-        ls -l -a
+        ls -l -a /usr/local/lib
+        ls -l -a /usr/lib
+        ls -l -a /lib
 
     - name: Build klee
       run: |

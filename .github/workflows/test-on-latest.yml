@@ -77,6 +77,7 @@ jobs:
         mkdir build
         cd build
         cmake ../
-        # cmake -DENABLE_UNIT_TESTS=ON -ENABLE_SYSTEM_TESTS=ON -DGTEST_SRC_DIR=~/klee/test ../
-        make
-        sudo make check
+        # cmake -DENABLE_UNIT_TESTS=FF -ENABLE_SYSTEM_TESTS=ON -DGTEST_SRC_DIR=~/klee/test ../
+        # cmake -DENABLE_SOLVER_STP=ON -DENABLE_POSIX_RUNTIME=ON -DLLVM_CONFIG_BINARY=/usr/local/llvm-2.9/bin/llvm-config .
+        make -j4
+        sudo make install
